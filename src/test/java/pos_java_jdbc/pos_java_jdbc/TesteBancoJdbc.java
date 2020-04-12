@@ -2,14 +2,23 @@ package pos_java_jdbc.pos_java_jdbc;
 
 import org.junit.Test;
 
-import conexaojdbc.SingleConnection;
+import dao.UserPosDAO;
+import model.Userposjava;
 
 public class TesteBancoJdbc {
 	
 	@Test
 	public void initBanco() {
-		//Chamar o SingleConnection
-		SingleConnection.getConnection();
+		UserPosDAO userPosDAO = new UserPosDAO();
+		Userposjava userposjava = new Userposjava();
+		
+		userposjava.setId(6L);
+		userposjava.setNome("Paulo");
+		userposjava.setEmail("paulo@gmail.com");
+		
+		userPosDAO.salvar(userposjava);
+		
+		
 	}
 
 }
