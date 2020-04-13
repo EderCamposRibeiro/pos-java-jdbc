@@ -120,5 +120,27 @@ public class UserPosDAO {
 			}
 		}
 	}
+	
+	public void deletar(Long id) {
+		Userposjava userposjava = new Userposjava();
+		try {
+			//SQL para apagar dados na tabela
+			String sql = "delete from userposjava where id = " + id;
+			
+			//Compilando o SQL
+			PreparedStatement sta = connection.prepareStatement(sql);
+
+			//Executando a atualização
+			sta.execute();
+			//Commitando/Gravando no Banco de Dados
+			connection.commit();
+		} catch (Exception e) {
+			try {
+				connection.rollback();//Reverte caso de algum erro
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 
 }
