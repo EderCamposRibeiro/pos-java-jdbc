@@ -96,5 +96,29 @@ public class UserPosDAO {
 		}
 		return retorno;
 	}
+	
+	public void atualizar(Userposjava userposjava) {
+		
+		try {
+			//SQL usando SET para informar o nome valor:
+			String sql = "update userposjava set nome = ? where id = " + userposjava.getId();
+			
+			//Compilando o SQL
+			PreparedStatement sta = connection.prepareStatement(sql);
+			//Passando o parâmetro para update
+			sta.setString(1, userposjava.getNome());
+			
+			//Executando a atualização
+			sta.execute();
+			//Commitando/Gravando no Banco de Dados
+			connection.commit();
+		} catch (SQLException e) {
+			try {
+				connection.rollback();//Reverte caso de algum erro
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 
 }
