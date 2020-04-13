@@ -13,10 +13,9 @@ public class TesteBancoJdbc {
 	public void initBanco() {
 		UserPosDAO userPosDAO = new UserPosDAO();
 		Userposjava userposjava = new Userposjava();
-		
-		userposjava.setId(6L);
-		userposjava.setNome("Paulo");
-		userposjava.setEmail("paulo@gmail.com");
+
+		userposjava.setNome("Autoincrementar teste");
+		userposjava.setEmail("autoincrement@gmail.com");
 		
 		userPosDAO.salvar(userposjava);
 		

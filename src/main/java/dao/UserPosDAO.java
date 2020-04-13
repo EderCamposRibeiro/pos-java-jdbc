@@ -21,14 +21,14 @@ public class UserPosDAO {
 	public void salvar (Userposjava userposjava) {
 		try {
 			String sql = "insert into userposjava "
-					   + "(id, nome, email) "
-					   + "values (?,?,?) ";//String do SQL
+					   + "(nome, email) " //id retirado pois agora vai incrementar automaticamente;
+					   + "values (?,?) ";//String do SQL
 			//Retorna o objeto de instrução
 			PreparedStatement insert = connection.prepareStatement(sql);
 			//Parâmetros sendo adicionados:
-			insert.setLong(1, userposjava.getId());
-			insert.setString(2, userposjava.getNome());
-			insert.setString(3, userposjava.getEmail());
+			//insert.setLong(1, userposjava.getId());
+			insert.setString(1, userposjava.getNome()); //Posições corrigidas!!!!
+			insert.setString(2, userposjava.getEmail());
 			//SQL sendo executado no Banco de Dados:
 			insert.execute();
 			//Salva no Banco de Dados:
