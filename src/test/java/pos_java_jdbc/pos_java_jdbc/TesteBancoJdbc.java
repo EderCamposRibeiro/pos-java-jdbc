@@ -104,4 +104,16 @@ public class TesteBancoJdbc {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testeDeleteUserFone() {
+		try {
+			UserPosDAO dao = new UserPosDAO();
+			
+			dao.deletarFonesPorUser(2L);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

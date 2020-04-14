@@ -203,5 +203,27 @@ public class UserPosDAO {
 		}
 		return list;
 	}
+	
+	public void deletarFonesPorUser(Long idUser) {
+		try {
+			//SQL para apagar dados na tabela
+			String sqlFone = "delete from telefoneuser where usuariopessoa = " + idUser;
+			String sqlUser = "delete from userposjava where id = " + idUser;
+			//Compilando o SQL
+			PreparedStatement sta = connection.prepareStatement(sqlFone);
+			sta.executeUpdate();
+			connection.commit();
+			sta = connection.prepareStatement(sqlUser);
+			sta.executeUpdate();
+			connection.commit();
+		} catch (Exception e) {
+			try {
+				connection.rollback();//Reverte caso de algum erro
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		e.printStackTrace();	
+		}
+	}
 
 }
