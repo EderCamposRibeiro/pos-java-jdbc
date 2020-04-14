@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
@@ -168,6 +169,39 @@ public class UserPosDAO {
 				e1.printStackTrace();
 			}
 		}
+	}
+	
+	public List<BeanUserFone> listarUserFone(Long id) throws Exception {
+		
+		//Lista de retorno do método:
+		List<BeanUserFone> list = new ArrayList<BeanUserFone>();
+		
+		//Istrução SQL:
+		String sql = "select b.nome, a.numero, b.email  from telefoneuser A "  
+				   + "inner join userposjava B "  
+				   + "on A.usuariopessoa = B.id "
+				   + "where B.id = " + id;
+		
+		//Objeto de instrução:
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+		//Executa a consulta ao Banco de Dados:
+		ResultSet resultado = statement.executeQuery();
+		
+		//Iteramos percorrendo o objeto ResultSet que tem os dados:
+		while (resultado.next()) {
+			//Criamos um objeto para cada linha retornada:
+			BeanUserFone beanUserFone = new BeanUserFone();
+			
+			//Setamos os valores para o objeto:
+			beanUserFone.setNome(resultado.getString("nome"));
+			beanUserFone.setNumero(resultado.getString("numero"));
+			beanUserFone.setEmail(resultado.getString("email"));
+			
+			//para cada objeto adicionamos ele á lista de retorno:
+			list.add(beanUserFone);
+		}
+		return list;
 	}
 
 }
